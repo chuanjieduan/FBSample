@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-@Entity
+@Entity(name="vacation")
 public class Vacation {
 
 	@Id
@@ -20,7 +20,7 @@ public class Vacation {
 	private Integer userid;
 
 	@Column(name = "resortid", nullable = false)
-	private String resortid;
+	private Integer resortid;
 	
 	@Column(name = "startdate", nullable = false)
 	private Date startdate = new Date();
@@ -35,7 +35,7 @@ public class Vacation {
     public Vacation() {
     }
     
-    public Vacation(Integer userid, String resortid,
+    public Vacation(Integer userid, Integer resortid,
 			Date startdate, Date enddate) {
 		this.userid = userid;
 		this.resortid = resortid;
@@ -43,7 +43,7 @@ public class Vacation {
 		this.enddate = enddate;
 	}
 
-	public Vacation(Integer id, Integer userid, String resortid,
+	public Vacation(Integer id, Integer userid, Integer resortid,
 			Date startdate, Date enddate, Date createtime) {
 		this.id = id;
 		this.userid = userid;
@@ -69,11 +69,11 @@ public class Vacation {
 		this.userid = userid;
 	}
 
-	public String getResortid() {
+	public Integer getResortid() {
 		return resortid;
 	}
 
-	public void setResortid(String resortid) {
+	public void setResortid(Integer resortid) {
 		this.resortid = resortid;
 	}
 

@@ -61,6 +61,24 @@ public class DestinaceServiceImpl implements DestinaceService {
     	LOGGER.debug("Retrieving the list of all resorts");
         return resortRepository.findByAreaid(areaid);
 	}
+    
+    @Override
+    @Transactional(readOnly = true)
+	public Country getCountryById(Integer id) {
+        return countryRepository.findOne(id);
+	}
+    
+    @Override
+    @Transactional(readOnly = true)
+	public Area getAreaById(Integer id) {
+        return areaRepository.findOne(id);
+	}
+    
+    @Override
+    @Transactional(readOnly = true)
+	public Resort getResortById(Integer id) {
+        return resortRepository.findOne(id);
+	}
 
 	@Override
 	public Boolean save() {

@@ -45,5 +45,11 @@ public class UserServiceImpl implements UserService {
         LOGGER.debug("Retrieving the list of all users");
         return repository.findAll();
     }
+    
+    @Transactional(readOnly = true)
+    public User getUserByName(String name) {
+        LOGGER.debug("Retrieving the user by name");
+        return repository.findByName(name);
+    }
 
 }

@@ -78,4 +78,12 @@ public class Resort {
 		this.areaid = areaid;
 	}
 
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
 }

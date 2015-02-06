@@ -15,7 +15,8 @@
 	<script src="/js/fb.js" type="text/javascript"></script>
 </head>
 <body>
-	<form class="jotform-form" action="" method="post"
+	<h3>Welcome Daniel</h3>
+	<form class="jotform-form" action="/addVacation.html" method="post"
 		accept-charset="utf-8">
 		<div class="form-all">
 			<ul class="form-section">
@@ -26,6 +27,19 @@
 						</div>
 					</div>
 				</li>
+				<li class="form-line" data-type="control_textbox" id="id_29"><label
+					class="form-label form-label-left form-label-auto" id="label_29"
+					for="input_29"> User: <span class="form-required">
+							* </span>
+				</label>
+					<div id="cid_29" class="form-input-wide ">
+						<select class="form-list select" name="userid" id="userid">
+							<option class="option">Select user</option>
+							<c:forEach items="${users}" var="user">
+								<option class="option" value="${user.id}">${user.name}</option>
+							</c:forEach>
+						</select>
+					</div></li>
 				<li class="form-line" data-type="control_textbox" id="id_29"><label
 					class="form-label form-label-left form-label-auto" id="label_29"
 					for="input_29"> Country: <span class="form-required">
@@ -55,7 +69,7 @@
 							* </span>
 				</label>
 					<div id="cid_30" class="form-input-wide ">
-						<select class="form-list select" name="resort" id="resort">
+						<select class="form-list select" name="resortid" id="resort">
 							<option class="option">Select resort</option>
 						</select>
 					</div></li>
@@ -65,7 +79,7 @@
 					<span class="form-required"> * </span>
 					</label>
 					<div id="startdate" class="input-append date">
-						<input type="text"></input> <span class="add-on"> <i
+						<input type="text" name="startdate"></input> <span class="add-on"> <i
 							data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 						</span>
 					</div>
@@ -78,7 +92,7 @@
 							* </span>
 				</label>
 				<div id="enddate" class="input-append date">
-						<input type="text"></input> <span class="add-on"> <i
+						<input type="text" name="enddate"></input> <span class="add-on"> <i
 							data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 						</span>
 					</div></li>
@@ -120,7 +134,6 @@
 				});
 			</script>
 		</div>
-		<input type="hidden" name="user" value="${user}" />
 	</form>
 
 	<div class="form-all">
@@ -132,12 +145,16 @@
 					</div>
 				</div>
 			</li>
-			<li class="form-line" data-type="control_textbox" id="id_29"><label
-				class="form-label form-label-left form-label-auto" id="label_29"
-				for="input_29"> Linda will travel to Mamora Bay in 132 days </label>
-				<div class="fb-share-button"
-					data-href="http://www.viawebtour.sk/Vyhladavanie/Afganistan/Balkh/?id_Oblast=3093&id_Stat=231&id_Stredisko=8301"
-					data-layout="button"></div></li>
+			<li class="form-line" data-type="control_textbox" id="id_29">
+			<c:if test="${not empty vacations}">
+			<c:forEach items="${vacations}" var="vacation">
+				<label class="form-label form-label-left form-label-auto" id="label_29" for="input_29"> 
+					${vacation.message} 
+				</label>
+				<div class="fb-share-button" data-href="${vacation.link }" data-layout="button"></div>
+			</c:forEach>
+			</c:if>
+			</li>
 		</ul>
 	</div>
 
@@ -174,7 +191,7 @@
 			success :function (data){
 				var serviceHtml = "<option class=\"option\">Select resort</option>";
 				$(data).each(function(index){
-					serviceHtml += "<option class=\"option\" value=\""+this.link+"\">"+this.name+"</option>";
+					serviceHtml += "<option class=\"option\" value=\""+this.id+"\">"+this.name+"</option>";
 				});
 				$("#resort").html(serviceHtml);
 			},error:function (){

@@ -16,4 +16,10 @@ public interface DestinaceService {
 
 	List<Resort> getResortListByAreaid(Integer areaid);
 
+	Resort getResortById(Integer id);
+
+	Area getAreaById(Integer id);
+
+	Country getCountryById(Integer id);
+
 }
